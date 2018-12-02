@@ -1,0 +1,65 @@
+h1 {
+    text-transform: capitalize;
+    font-family: Cooper Black;
+}
+
+body {
+    background-image: url("http://www.baltana.com/files/wallpapers-10/Teal-Abstract-Wave-Wallpaper-28506.png");
+    font-family: Bookman Old Style;
+    background-size: 100%;
+}
+
+#email, #password {
+    border-color: #85e0e0;
+    width: 200px;
+    height: 30px;
+}
+
+#hrText {
+    text-align: center;
+}
+
+#logInButtn{
+    border-radius: 30%;
+    background-color: #85e0e0;
+    width: 100px;
+}
+
+#logInButtn:hover {
+    background-color: #29a3a3;
+    color: white;
+}
+/*#forgotpasswordButtn{
+     border-radius: 30%;
+    background-color: #85e0e0;
+    width: 100px;
+}
+#forgotpasswordButtn:hover {
+    background-color: #29a3a3;
+    color: white;
+}*/
+
+
+#loginBox {
+    border-color: #ffff00;
+    border-style: groove;
+    text-align: center;
+    /*display: inline-block;*/
+    /*background-color: white;*/
+    /*width: 300px;*/
+    /*height: 300px;*/
+    /*border-radius: 25%;*/
+    margin:200px 400px;
+    background-color: #ffffff;
+    padding-bottom: 10px;
+}
+
+#mainFrame {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    color: #FF0000;
+}

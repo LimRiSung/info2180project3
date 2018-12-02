@@ -1,0 +1,80 @@
+body {
+    font-family: Bookman Old Style;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-family: Cooper Black;
+}
+
+img {
+    width: 15px;
+    height: 15px;
+}
+
+#firstName, #lastName, #passWord, #confirmPass ,#emailAdd, #telephoneNo,#confirmPass{
+    border-color: #85e0e0;
+    width: 250px;
+}
+
+/*#grid {
+    display: flex;
+    flex-wrap: wrap;
+}*/
+
+#headerBar {
+    background-image: url("http://www.baltana.com/files/wallpapers-10/Teal-Abstract-Wave-Wallpaper-28506.png");
+    color: white;
+    width: 100%;
+    height: 50px;
+}
+
+#home, #newJob, #addUser, #logOut {
+    text-decoration: none;
+}
+
+#home:hover, #newJob:hover, #addUser:hover, #logOut:hover {
+    background-color: #29a3a3;
+}
+
+#mainBar {
+    /*max-height: 900px;*/
+    /*width: 800px;*/
+    /*float: right*/
+    
+    padding-top: 8px;
+    padding-left: 20px;
+}
+
+#generalcontainer{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    padding-right: 100px;
+}
+
+#sideBar {
+/*    background-color: #eee;*/
+/*    margin-right: 2px;*/
+/*    float: left;*/
+/*    margin-top: 10px;*/
+/*    margin-left: 40px;*/
+    /*max-height: 900px;*/
+    /*width: 200px;*/
+/*    padding-bottom: 30px;*/
+    background-color: #eee;
+    margin-left:2px;
+    margin-top:1px;
+    margin-right:2px;
+    padding-top: 35px;
+    padding-left: 10px;
+}
+
+#submitButtn {
+    background-color: #85e0e0;
+    border-radius: 25%;
+}
+
+#submitButtn:hover {
+    background-color: #29a3a3;
+    color: white;
+}
