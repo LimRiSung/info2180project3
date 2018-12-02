@@ -1,3 +1,4 @@
+<?php require "header.php" ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,9 +8,13 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="new_user.js" type="text/javascript"></script>
     </head>
-    
     <body>
         <?php
+        if (isset($_SESSION['user']['email']))
+        {
+            $loggedOnUser = $_SESSION['user']['email'];
+        }
+        
         $host = getenv('IP');
         $username = getenv('C9_USER');
         $password = '';
@@ -45,9 +50,9 @@
                     }
                     else {
                         $lastName = test_input($_POST['lastname']);
-                        if(!preg_match("/^[a-zA-Z]*$/", $firstName))
+                        if(!preg_match("/^[a-zA-Z]*$/", $lastName))
                         {
-                            $firstNameErr = "Oops! Only letters and whitespace allowed";
+                            $lastNameErr = "Oops! Only letters and whitespace allowed";
                         }
                         }
                 if(!empty($_POST['password']) && ($_POST['password'] == $_POST['confirmpass'])){
@@ -90,9 +95,17 @@
                 }
       
     $userPassword = password_hash($userPassword, PASSWORD_DEFAULT);
-    $pdoQuery = "INSERT INTO Users (firstname, lastname, password, telephone, email, date_joined) VALUES ('$firstName', '$lastName', '$userPassword' , '$telephone', '$email', CURDATE())";
-    $conn->exec($pdoQuery);  
-        
+    $stmt = $conn->prepare("SELECT * FROM Users WHERE email = '$email'");
+    $stmt->execute();
+    $user = $stmt->fetch();
+    if ($user['email'])
+    {
+        $emailErr = "This email has been used already";
+    }
+    else {
+        $pdoQuery = "INSERT INTO Users (firstname, lastname, password, telephone, email, date_joined) VALUES ('$firstName', '$lastName', '$userPassword' , '$telephone', '$email', CURDATE())";
+    $conn->exec($pdoQuery);
+    }
     }
 }
 catch (PDOException $e)
@@ -108,37 +121,38 @@ catch (PDOException $e)
         </div>
         <div id="generalcontainer">
            <div id = "sideBar">
-                <img src="https://openclipart.org/download/68863/sweet-home.svg"/><a href id = "home">Home</a><br/><br/>
-                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"/><a href id = "addUser">Add User</a><br/><br/>
-                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"/><a href id = "newJob">New Job</a><br/><br/>
+                <img src="https://openclipart.org/download/68863/sweet-home.svg"/><a href="#" id = "home">Home</a><br/><br/>
+                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"/><a href="#" id = "addUser">Add User</a><br/><br/>
+                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"/><a href="#" id = "newJob">New Job</a><br/><br/>
                 <img src="https://png2.kisspng.com/sh/57a976f26d3b43a3a9cb650ca51eb22b/L0KzQYm3V8E1N6lngJH0aYP2gLBuTgBwf5Z3ReVEbXLyfH7qjB1xfaVqip9yY3Bxg37zjBdwfaUygdV4bj24coXog8A0OGM6fKg9Nz67SIa6VMg6OmI6S6MBMkW4QoG4VcUveJ9s/kisspng-power-symbol-computer-icons-logout-icon-5b4ac03025d647.885348921531625520155.png"/><a href id = "logOut">Logout</a><br><br/>
             </div>
             <div id = "mainBar">
                 <h1>New User</h1>
-                <form method = "post" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+                <form name="new_user" method = "post"  action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" onsubmit="return validation();">
                     <label>Firstname: <br/><br/>
-                    <input id = "firstName" type="text" name="firstname" placeholder="eg: Mary"/><div class = "error">*
+                    <input id = "firstName" type="text" name="firstname" placeholder="eg: Mary" required/><div class = "error">*
 	    			<?php echo $firstNameErr;?></div><br/><br/></label>
                     
                 
                     <label>Lastname: <br/><br/>
-                    <input id = "lastName" type="text" name="lastname" placeholder="eg: Jane"/><div class = "error">*
+                    <input id = "lastName" type="text" name="lastname" placeholder="eg: Jane" required/><div class = "error">*
 	    			<?php echo $lastNameErr;?></<div><br/><br/></label>
                 
                     <label>Password: <br/><br/>
-                    <input id = "passWord" type="password" name="password"/><div class = "error">*
+                    <input id = "passWord" type="password" name="password" required/><div class = "error">*
 	    			<?php echo $passwordErr;?></div><br/><br/></label>
                     
                     <label>Confirm Password: <br/><br/>
-                    <input id="confirmPass" type="password" name="confirmpass"/><div class = "error">*
+                    <input id="confirmPass" type="password" name="confirmpass" required/><div class = "error">*
 	    			<?php echo $confirmPasswordErr;?></div><br/><br/></label>
 	   	            
                     <label>Email: <br/><br/>
-                    <input id = "emailAdd" type="text" name="email" placeholder="eg. mary.jane@example.com"/><div class = "error">*
+                    <input id = "emailAdd" type="text" name="email" placeholder="eg. mary.jane@example.com" required/><div class = "error">*
 	    			<?php echo $emailErr;?></div><br/><br/></label>
                 
                     <label>Telephone: <br/><br/>
-                    <input id = "telephoneNo" type="text" name="telephone" placeholder="eg. 876-999-8989"/><div class = "error">*
+                    <input id = "telephoneNo" type="text" name="telephone" placeholder="eg. 876-999-8989" required/>
+                    <div class = "error">*
 	    			<?php echo $telephoneErr;?></div><br/><br/></label>
                 
                     <input id = "submitButtn" type="submit" name="submit" value="SUBMIT"/>

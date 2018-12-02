@@ -1,3 +1,4 @@
+<?php require "header.php" ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,13 +28,11 @@
 		try {
 			$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			session_start();
 			if (isset($_POST['submit'])) {
 				if(empty($_POST['email'])){
 					$emailErr = "Email is required"; }
 				else {
 					$email = test_input($_POST['email']);
-					
 				    }
 				if(empty($_POST['password']))
 				{
@@ -48,13 +47,21 @@
         if ($user && password_verify($userPassword, $user['password']))
         {
             $_SESSION['user'] = $user;
-            header('Location: dashboard.html');
+            if ($_SESSION['user']['email'] == "admin@hireme.com")
+            {
+            	$_SESSION["role"] = 1;
+            }
+            else 
+            {
+            	$_SESSION["role"] = 2;
+            }
+            header('Location: dashboard.php');
             //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/dashboard.html', true, 303);
             exit;
             
         }
         else {
-             $invalidEmailPass = "Oops! Invalid email or password";
+             $passwordErr = "Oops! Invalid email or password";
         }
     }
 
@@ -71,16 +78,14 @@
 	        	<h1>User Login</h1>
 	    		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 	    			<label>Email:</label>
-	    			<input id="email" type="Email" name="email" placeholder="Email"/>
+	    			<input id="email" type="Email" name="email" placeholder="Email" required/>
 	    			<div class = "error">*<?php echo $emailErr;?></div><br/><br/>
 	   	        
 	   	        	<label>Password:</label>
-	   	        	<input id="password" type="password" name="password" placeholder="Password"/>
+	   	        	<input id="password" type="password" name="password" placeholder="Password" required/>
 	   	        	<div class = "error">*<?php echo $passwordErr;?></div><br/><br/>
-	   	        	<div class = "error"></div><?php echo $invalidEmailPass;?><br/><br/>
+	   	        	<input id = "forgotpasswordButtn" type="submit" name="forgotsubmit" value="FORGOT PASSWORD?"/><br/><br/>
 	   	        	<input id = "logInButtn" type="submit" name="submit" value="LOGIN"/>
-	   	        	<input id = "forgotpasswordButtn" type="submit" name="forgotsubmit" value="FORGOT PASSWORD?"/>
-	   	    	
 	   	    	</form>
 	   		</div>
 	   </div>

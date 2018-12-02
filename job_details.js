@@ -52,7 +52,8 @@ window.onload = function() {
         }
         else 
         {
-            var url = "https://info2180project3-jazzydreamer.c9users.io/login_page.html";
+            window.location.replace("index.php");
+            //var url = "https://info2180project3-jazzydreamer.c9users.io/login_page.html";
         }
     });
     

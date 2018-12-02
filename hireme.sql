@@ -37,3 +37,20 @@ CREATE TABLE JobsAppliedFor(
 	FOREIGN KEY(job_id) references Jobs(id) on update cascade on delete restrict,
 	FOREIGN KEY(user_id) references Users(id) on update cascade on delete restrict
 );
+
+ALTER TABLE Users MODIFY telephone VARCHAR(12);
+
+LOCK TABLES 'Users' WRITE;
+INSERT INTO 'Users' VALUES (0058, "Timothy", "Simpson", "passMeby", "8765851230", "tim_simpson@hireme.com", Sept 10 2018),
+(0934, "Sabreen", "Hasan", "som3th1ng", "8764386910", "sabreen_hasan@hireme.com", Sept 21 2015),
+(7651, "David", "Douglas", "doug13", "keepfresh@hireme.com", Feb 2 2018),
+(8765, "Chris San", "Williams", "chrissyW", "chrisWilliams@hireme.com", Dec 23 2016),
+(0010, "Jonah", "Whale", "meditation", "whale-jonah@hireme.com", July 17 2018),
+(2222, "Zhavia", "Fletcher", "independent765", "rehctelf@hireme.com", Mar 29 2017),
+(4903, "Monique", "McIntosh", "123funzywunzy", "monMac@hireme.com", Oct 3 2017),
+(0000, "Vanqueesha", "Lavish", "bosslady", "admin@hireme.com", Jan 7 2015),
+(1110, "Malique", "Thousand", "D$llars", "queenMoney@hireme.com", May 18 2018),
+(5427, "Eileen", "Wilson", "password989", "neelieW@hireme.com", June 1 2017),
+
+
+

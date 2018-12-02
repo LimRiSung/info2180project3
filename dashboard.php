@@ -1,3 +1,4 @@
+<?php require "header.php" ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,13 +14,13 @@
         </div>
         <div id ="generalcontainer">
             <div id = "sideBar">
-                <p><img src="https://openclipart.org/download/68863/sweet-home.svg"></img><a href id = "home">Home</a><br>
-                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"></img><a href id = "addUser">Add User</a><br>
-                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"></img><a href id = "newJob">New Job</a><br>
+                <p><img src="https://openclipart.org/download/68863/sweet-home.svg"></img><a href = "#" id = "home">Home</a><br>
+                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"></img><a href = "#" id = "addUser">Add User</a><br>
+                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"></img><a href = "#" id = "newJob">New Job</a><br>
                 <!--<img src="https://png2.kisspng.com/sh/57a976f26d3b43a3a9cb650ca51eb22b/L0KzQYm3V8E1N6lngJH0aYP2gLBuTgBwf5Z3ReVEbXLyfH7qjB1xfaVqip9yY3Bxg37zjBdwfaUygdV4bj24coXog8A0OGM6fKg9Nz67SIa6VMg6OmI6S6MBMkW4QoG4VcUveJ9s/kisspng-power-symbol-computer-icons-logout-icon-5b4ac03025d647.885348921531625520155.png"></img><a href id = "logOut">Logout</a><br></p>-->
-                <form action="logout.php" method="post">
-                    <input id="logOutBtn" type="submit" name="submit" value="Logout">
-                </form>
+                
+                <button id ="logoutBtn">Logout</button>
+                
             </div>
             <div id = "mainBar">
                 <h1>Dashboard</h1>

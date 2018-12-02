@@ -18,31 +18,22 @@ window.onload = function() {
         httpReq.send();
     });
     
-    clickHome.addEventListener('click', function goToHomePage(e) {
+    clickHome.addEventListener('click', function(e) {
         e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/dashboard.html";
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
+        window.location.replace("dashboard.php");
+        return false;
     });
     
-    clickAddUser.addEventListener('click', function goToNewUser(e) {
+    clickAddUser.addEventListener('click', function(e) {
         e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/new_user.html"; 
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
+        window.location.replace("new_user.php");
+        return false;
     });
     
-    clickNewJob.addEventListener('click', function goToNewJob(e) {
+    clickNewJob.addEventListener('click', function(e) {
         e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/new_job.html";
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
+        window.location.replace("new_job.php");
+        return false;
     });
     
     clickLogout.addEventListener('click', function goToLoginPage(e) {
@@ -53,7 +44,8 @@ window.onload = function() {
         }
         else 
         {
-            var url = "https://info2180project3-jazzydreamer.c9users.io/login_page.html";
+            window.location.replace("index.php");
+            //var url = "https://info2180project3-jazzydreamer.c9users.io/login_page.html";
         }
     });
     

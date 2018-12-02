@@ -1,3 +1,4 @@
+<?php require "header.php" ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,12 +33,6 @@
                     <h2 id = "jobDescript">Job Description</h2>
                     <p id = "contentJobDescript"></p>
                 </div>
-                
-                <div>
-                    <h3 id = "jobRequire">Job Requirments</h3>
-                    <p id = "contentJobRequire"></p>
-                </div>
-            
             </div>
         </div>
     </body>
