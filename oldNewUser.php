@@ -32,7 +32,9 @@
         try {
             $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            if (isset($_POST['submit'])) {
+            if (isset($_POST['submit'])) 
+            {
+                echo "Hello";
                 if(empty($_POST['firstname']))
                 {
                     $firstNameErr = "First Name is required";
@@ -58,7 +60,7 @@
                 if(!empty($_POST['password']) && ($_POST['password'] == $_POST['confirmpass'])){
                     $userPassword = test_input($_POST['password']);
                     $confirmPassword = test_input($_POST['confirmpass']);
-                    if(strlen($_POST['password']) <= 8)
+                    if(strlen($_POST['password']) < 8)
                     {
                         $passwordErr = "Password Must Contain At Least 8 Characters!";
                     }
@@ -98,6 +100,7 @@
     $stmt = $conn->prepare("SELECT * FROM Users WHERE email = '$email'");
     $stmt->execute();
     $user = $stmt->fetch();
+    echo $user;
     if ($user['email'])
     {
         $emailErr = "This email has been used already";
@@ -124,41 +127,41 @@ catch (PDOException $e)
                 <img src="https://openclipart.org/download/68863/sweet-home.svg"/><a href="#" id = "home">Home</a><br/><br/>
                 <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"/><a href="#" id = "addUser">Add User</a><br/><br/>
                 <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"/><a href="#" id = "newJob">New Job</a><br/><br/>
-                <img src="https://png2.kisspng.com/sh/57a976f26d3b43a3a9cb650ca51eb22b/L0KzQYm3V8E1N6lngJH0aYP2gLBuTgBwf5Z3ReVEbXLyfH7qjB1xfaVqip9yY3Bxg37zjBdwfaUygdV4bj24coXog8A0OGM6fKg9Nz67SIa6VMg6OmI6S6MBMkW4QoG4VcUveJ9s/kisspng-power-symbol-computer-icons-logout-icon-5b4ac03025d647.885348921531625520155.png"/><a href id = "logOut">Logout</a><br><br/>
+                <form action="logout.php" method="POST">
+                    <input type="submit"value="LOGOUT">
+                </form>
             </div>
             <div id = "mainBar">
                 <h1>New User</h1>
-                <form name="new_user" method = "post"  action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" onsubmit="return validation();">
-                    <label>Firstname: <br/><br/>
-                    <input id = "firstName" type="text" name="firstname" placeholder="eg: Mary" required/><div class = "error">*
-	    			<?php echo $firstNameErr;?></div><br/><br/></label>
+                <p id = "head"></p>
+                <form id = "userCreationForm" name="new_user" method = "post"  action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+                    <label>Firstname:</label><br/><br/>
+                    <input id = "firstName" type="text" name="firstname" placeholder="eg: Mary"/>
+                    <div class = "error">*<?php echo $firstNameErr;?></div><br/><br/>
                     
+                    <label>Lastname:</label><br/><br/>
+                    <input id = "lastName" type="text" name="lastname" placeholder="eg: Jane" />
+                    <div class = "error">*<?php echo $lastNameErr;?></<div><br/><br/>
                 
-                    <label>Lastname: <br/><br/>
-                    <input id = "lastName" type="text" name="lastname" placeholder="eg: Jane" required/><div class = "error">*
-	    			<?php echo $lastNameErr;?></<div><br/><br/></label>
-                
-                    <label>Password: <br/><br/>
-                    <input id = "passWord" type="password" name="password" required/><div class = "error">*
-	    			<?php echo $passwordErr;?></div><br/><br/></label>
+                    <label>Password:</label><br/><br/>
+                    <input id = "passWord" type="password" name="password"/>
+                    <div class = "error">*<?php echo $passwordErr;?></div><br/><br/>
                     
-                    <label>Confirm Password: <br/><br/>
-                    <input id="confirmPass" type="password" name="confirmpass" required/><div class = "error">*
-	    			<?php echo $confirmPasswordErr;?></div><br/><br/></label>
+                    <label>Confirm Password:</label><br/><br/>
+                    <input id="confirmPass" type="password" name="confirmpass"/>
+                   <div class = "error">*<?php echo $confirmPasswordErr;?></div><br/><br/>
 	   	            
-                    <label>Email: <br/><br/>
-                    <input id = "emailAdd" type="text" name="email" placeholder="eg. mary.jane@example.com" required/><div class = "error">*
-	    			<?php echo $emailErr;?></div><br/><br/></label>
+                    <label>Email:</label><br/><br/>
+                    <input id = "emailAdd" type="text" name="email" placeholder="eg. mary.jane@example.com"/>
+                    <div class = "error">*<?php echo $emailErr;?></div><br/><br/>
                 
-                    <label>Telephone: <br/><br/>
-                    <input id = "telephoneNo" type="text" name="telephone" placeholder="eg. 876-999-8989" required/>
-                    <div class = "error">*
-	    			<?php echo $telephoneErr;?></div><br/><br/></label>
+                    <label>Telephone:</label><br/><br/>
+                    <input id = "telephoneNo" max="12" type="text" name="telephone" placeholder="eg. 876-999-8989" />
+                   <div class = "error">*<?php echo $telephoneErr;?></div><br/><br/>
                 
                     <input id = "submitButtn" type="submit" name="submit" value="SUBMIT"/>
                 </form>
             </div>
-           
         </div>
     </body>
 </html>

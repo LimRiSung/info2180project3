@@ -89,3 +89,10 @@ img {
 #tableHead {
     background-color: #f2f2f2;
 }
+#new{
+    background-color:yellow;
+}
+
+table{
+    padding:5px;
+}

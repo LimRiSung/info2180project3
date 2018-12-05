@@ -33,16 +33,20 @@ window.onload = function() {
     
     clickLogout.addEventListener('click', function(e) {
         
-        var promptUser = prompt("Are you sure you want to logout?")
+       alert("You have been logged out!");
+       window.open("index.php");
+      
+        // var promptUser = prompt("Are you sure you want to logout?")
         
-        if (promptUser == true) {
-            window.location.replace("index.php");
-        }
-        else 
-        {
-            document.location.reload();
-           // var url = "https://info2180project3-jazzydreamer.c9users.io/login_page.html";
-        }
+        // if (promptUser == true) {
+        //     window.location.replace("index.php");
+        //     return false;
+        // }
+        // else 
+        // {
+        //     document.location.reload();
+        //   // var url = "https://info2180project3-jazzydreamer.c9users.io/login_page.html";
+        // }
     });
     
     /*function loadPage() {

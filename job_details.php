@@ -1,4 +1,3 @@
-<?php require "header.php" ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +13,13 @@
         </div>
         <div id= "generalcontainer">
             <div id = "sideBar">
-                <img src="https://openclipart.org/download/68863/sweet-home.svg"/><a href id = "home">Home</a><br>
-                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"/><a href id = "addUser">Add User</a><br/>
-                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"/><a href id = "newJob">New Job</a><br/>
-                <img src="https://png2.kisspng.com/sh/57a976f26d3b43a3a9cb650ca51eb22b/L0KzQYm3V8E1N6lngJH0aYP2gLBuTgBwf5Z3ReVEbXLyfH7qjB1xfaVqip9yY3Bxg37zjBdwfaUygdV4bj24coXog8A0OGM6fKg9Nz67SIa6VMg6OmI6S6MBMkW4QoG4VcUveJ9s/kisspng-power-symbol-computer-icons-logout-icon-5b4ac03025d647.885348921531625520155.png"/><a href id = "logOut">Logout</a><br/>
+                <p><img src="https://openclipart.org/download/68863/sweet-home.svg"></img><a href = "#" id = "home">Home</a><br>
+                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"></img><a href = "#" id = "addUser">Add User</a><br>
+                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"></img><a href = "#" id = "newJob">New Job</a><br>
+                </p>
+                <form action='<?php echo $_SERVER['PHP_SELF'];?>' method="POST">
+                    <input type="submit"value="LOGOUT">
+                </form>
             </div>
             <div id = "mainBar">
                 <div>
@@ -32,8 +34,29 @@
                 <div>
                     <h2 id = "jobDescript">Job Description</h2>
                     <p id = "contentJobDescript"></p>
+                    <h3 id ="jobRequirements">Job Requirements</h3>
+                    <br>
+                    <p></p>
                 </div>
             </div>
         </div>
     </body>
 </html>
+
+<?php require "header.php"; 
+$host = getenv('IP');
+$username = getenv('C9_USER');
+$password = '';
+$dbname = 'hireme';
+$jobs = $_GET['Jobs'];
+
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $stmt = $conn->query("SELECT * FROM Jobs WHERE name LIKE '%$Jobs%'");
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo '<h1>' . $row['job_title'] . '</h1>';
+        echo '<p>' . $row['date_posted'] . '</p>';
+        echo '<p>' . $row['category'] . '</p>';
+        echo '<h3>' . $row['company_name'] . '</h3>';
+        echo '<h3>' . $row['company_location'] . '</h3>';
+        echo '<p>' . $row['job_description'] . '</p>';
+ ?>     

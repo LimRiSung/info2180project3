@@ -1,22 +1,88 @@
 // JavaScript File
 // JavaScript File
+
+    function validatefields(){
+        var category=document.getElementById("category").value;
+        var jobTitle=document.getElementById("jobTitle").value;
+        var jobDescript=document.getElementById("jobDescript").value;
+        var company=document.getElementById("company").value;
+        var jobLocation=document.getElementById("jobLocat").value;
+        var hasError=false;
+        var alertMsg="";
+        
+        if (!jobTitle.value.match("/^[a-zA-Z]+$/"))
+        {
+            alertMsg = "*Only letters allowed*";
+            document.getElementById("jobTitleErr").innerText = alertMsg;
+            jobTitle.focus();
+            hasError = false;
+        }
+        else {
+            hasError = true;
+        }
+        
+        if (!company.value.match("/^[a-zA-Z]+$/"))
+        {
+            alertMsg = "*Only letters allowed*";
+            document.getElementById("companyErr").innerText = alertMsg;
+            company.focus();
+            hasError = false;
+        }
+        else {
+            hasError = true;
+            
+        }
+        
+        return hasError;
+    
+            
+            
+            
+        // if(category==""){
+        //     alert("please choose a category for your job.");
+        //     return false;
+        // }
+        
+        // if (jobTitle==""){
+        //     alert("Please ensure to give your job a title.");
+        //     return false;
+        // }
+        
+        // if(jobDescript==""){
+        //     alert("A description of he job is needed.");
+        //     return false;
+        // }
+        // else{
+        //     return true;
+        // }
+    }
+    
+    
+    function loadPage() {
+        if (httpReq.readyState === XMLHttpRequest.DONE) 
+        {
+            if (httpReq.status === 200)
+            {
+                var response = httpReq.responseText;
+            }
+            else
+            {
+                alert("An error has occurred");
+            }
+        }
+    }
 window.onload = function() {
     var httpReq = new XMLHttpRequest();
-    var submitButtn = document.getElementById("submitButtn");
+    
     var clickHome = document.getElementById("home");
     var clickNewJob = document.getElementById("newJob");
     var clickAddUser = document.getElementById("addUser");
     var clickLogout = document.getElementById("logOut");
     
-    submitButtn.addEventListener('click', function submitInfo(e) {
-        e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/new_job.html";
-        /*Submit info to database instead of opening a new page*/
+    // submitButtn.addEventListener('click', function(e) {
+    //     e.preventDefault();
         
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
-    });
+    // });
     
     clickHome.addEventListener('click', function(e) {
         e.preventDefault();
@@ -49,17 +115,7 @@ window.onload = function() {
         }
     });
     
-    function loadPage() {
-        if (httpReq.readyState === XMLHttpRequest.DONE) 
-        {
-            if (httpReq.status === 200)
-            {
-                var response = httpReq.responseText;
-            }
-            else
-            {
-                alert("An error has occurred");
-            }
-        }
-    }
+    
+    
+    
 };

@@ -56,6 +56,7 @@
             	$_SESSION["role"] = 2;
             }
             header('Location: dashboard.php');
+            //header('Location: dashboard.html');
             //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/dashboard.html', true, 303);
             exit;
             

@@ -60,12 +60,12 @@
                            $categoryErr = "Invalid category";
                         }
                      }
-                if(empty($_POST['compay']))
+                if(empty($_POST['company']))
                     {
                       $companyErr = "Company is required";
                     }
                 else {
-                      $company = test_input($_POST['compay']);
+                      $company = test_input($_POST['company']);
                       if(!preg_match("/^[a-zA-Z]*$/", $company))
                      {
                         $companyErr = "Oops! Only letters and whitespace allowed";
@@ -76,8 +76,8 @@
                   $companyLocationErr = "Company Location is required";
                 }
                 else {
-                   $companyLocation = test_input($_POST['joblocat']);
-                   if(!preg_match("/^[a-zA-Z,]*$/", $company)) {
+                   $joblocat = test_input($_POST['joblocat']);
+                   if(!preg_match("/^[a-zA-Z,]*$/", $joblocat)) {
                       $companyErr = "Oops! Only letters, comma and whitespace allowed";
                     }
             
@@ -100,41 +100,47 @@ catch (PDOException $e)
         </div>
         <div id="generalcontainer">
             <div id = "sideBar">
-                <img src="https://openclipart.org/download/68863/sweet-home.svg"/><a href id = "home">Home</a><br/><br/>
-                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"/><a href id = "addUser">Add User</a><br/><br/>
-                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"/><a href id = "newJob">New Job</a><br/><br/>
-                <img src="https://png2.kisspng.com/sh/57a976f26d3b43a3a9cb650ca51eb22b/L0KzQYm3V8E1N6lngJH0aYP2gLBuTgBwf5Z3ReVEbXLyfH7qjB1xfaVqip9yY3Bxg37zjBdwfaUygdV4bj24coXog8A0OGM6fKg9Nz67SIa6VMg6OmI6S6MBMkW4QoG4VcUveJ9s/kisspng-power-symbol-computer-icons-logout-icon-5b4ac03025d647.885348921531625520155.png"/><a href id = "logOut">Logout</a><br/><br/>
+                <p><img src="https://openclipart.org/download/68863/sweet-home.svg"></img><a href = "#" id = "home">Home</a><br>
+                <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"></img><a href = "#" id = "addUser">Add User</a><br>
+                <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"></img><a href = "#" id = "newJob">New Job</a><br>
+                </p>
+                <form action="logout.php" method="POST">
+                    <input type="submit"value="LOGOUT">
+                </form>
             </div>
             <div id = "mainBar">
                 <h1>New Job</h1>
-                <form method = "post" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" >
+                <form method = "post" onsubmit="return validatefields();" name="new_job" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" >
                     <label>Category: 
-                    <select name = "category">
-                    <option value="hold"placeholder="Select a category..."></option>
-                    <option value="business">Business and Management</option>
-                    <option value="customer">Customer Support</option>
-                    <option value="design">Design</option>
-                    <option value="development">DevOps and Sysadmin</option>
-                    <option value="engineering">Engineering</option>
-                    <option value="program">Programming</option>
-                    <option value="sales">Sales and Marketing</option>
-                    </select></label><div class = "error">*
-	    			<?php echo $categoryErr;?><br/><br/>
+                    <select required name = "category" id="category">
+                        <option value="">Select a category</option>
+                        <option value="business">Business and Management</option>
+                        <option value="customer">Customer Support</option>
+                        <option value="design">Design</option>
+                        <option value="development">DevOps and Sysadmin</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="program">Programming</option>
+                        <option value="sales">Sales and Marketing</option>
+                    </select></label><div class = "error">*<?php echo $categoryErr;?></div><br/><br/>
                     <label>Job Title: <br/><br/>
-                    <input id = "jobTitle" type="text" name="jobtitle" placeholder="eg. Senior Designer or Product Manager"></label><div class = "error">*
+                    <input id = "jobTitle" type="text" name="jobtitle" placeholder="eg. Senior Designer or Product Manager" required/></label><div class = "error">*
 	    			<?php echo $jobTitleErr;?></div><br/><br/>
+	    			<div id ="jobTitleErr" class = "error"></div>
                     
                     <label>Job Description:<br/><br/>
-                    <input id = "jobDescript" type="text" name="jobdescript"></label><div class = "error">*
+                    <input id = "jobDescript" type="text" name="jobdescript" required/></label><div class = "error">*
 	    			<?php echo $jobDescriptionErr;?></div><br/><br/>
+	    			<div id = "jobDescriptErr" class = "error"></div>
                     
                     <label>Company: <br/><br/>
-                    <input id = "compay" type="text" name="compay"/></label><div class = "error">*
+                    <input id = "company" type="text" name="company" required/></label><div class = "error">*
 	    			<?php echo $companyErr;?></div><br/><br/>
+	    			<div id = "companyErr" class = "error"></div>
                     
                     <label>Job Location: <br/><br/>
-                    <input id = "jobLocat" type="text" name="joblocat" placeholder="eg. Kingston, Jamaica"/></label><div class = "error">*
+                    <input id = "jobLocat" type="text" name="joblocat" placeholder="eg. Kingston, Jamaica" required/></label><div class = "error">*
 	    			<?php echo $companyLocationErr;?></div><br/><br/>
+	    			<div id = "jobLocatErr" class = "error"></div>
                     
                     <input id = "submitButtn" type="submit" name="submit" value="Submit"/>
                 </form>

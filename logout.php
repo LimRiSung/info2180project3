@@ -1,8 +1,11 @@
 <?php
 session_start(); 
 session_unset();
-session_destroy();
-header('Location: index.php');
-//header('Location: http://' . $_SERVER['HTTP_HOST'] . 'index.php', true, 303);
+if (isset($_SESSION['user'])) {
+    destroySession();
+    session_destroy();
+    echo "You have successfully been logged out.";
+    header('Location: index.php');
+}
 exit;
 ?>

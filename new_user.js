@@ -1,4 +1,3 @@
-// JavaScript File// JavaScript File
 // JavaScript File
 window.onload = function() {
     var httpReq = new XMLHttpRequest();
@@ -22,24 +21,6 @@ window.onload = function() {
     submitButtn.addEventListener('click', function(e) {
         e.preventDefault();
         
-        /*if (Password !=PassConfirm)
-        {
-            alert("Please enter your email.");
-        }
-        if(Password < 8)
-        {
-            alert("Password is too short");
-            return false;
-        }
-        else {
-            return true;
-            // var url = "https://info2180project3-jazzydreamer.c9users.io/new_job.html";
-            // /*change url add data to database instead of opening a new page*/
-            
-            // httpReq.onreadystatechange = loadPage;
-            // httpReq.open('GET', url);
-            // httpReq.send();
-            }*/
     });
     
     clickHome.addEventListener('click', function(e) {

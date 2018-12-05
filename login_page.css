@@ -29,26 +29,21 @@ body {
     background-color: #29a3a3;
     color: white;
 }
-/*#forgotpasswordButtn{
-    border-radius: 30%;
-    background-color: #85e0e0;
-    width: 100px;
-}
-#forgotpasswordButtn:hover {
-    background-color: #29a3a3;
-    color: white;
-}*/
+/*#forgotpasswordButtn{*/
+/*    border-radius: 30%;*/
+/*    background-color: #85e0e0;*/
+/*    width: 100px;*/
+/*}*/
+/*#forgotpasswordButtn:hover {*/
+/*    background-color: #29a3a3;*/
+/*    color: white;*/
+/*}*/
 
 
 #loginBox {
     border-color: #ffff00;
     border-style: groove;
     text-align: center;
-    /*display: inline-block;*/
-    /*background-color: white;*/
-    /*width: 300px;*/
-    /*height: 300px;*/
-    /*border-radius: 25%;*/
     margin:200px 400px;
     background-color: #ffffff;
     padding-bottom: 10px;

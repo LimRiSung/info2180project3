@@ -1,6 +1,6 @@
 // JavaScript File
 // JavaScript File
-window.onload = function() {
+window.onload = function(e) {
     var httpReq = new XMLHttpRequest();
     var clickHome = document.getElementById("home");
     var clickNewJob = document.getElementById("newJob");
@@ -8,40 +8,22 @@ window.onload = function() {
     var clickLogout = document.getElementById("logOut");
     var applyButtn = document.getElementById("applyButtn");
     
-    applyButtn.addEventListener('click', function applyForJob(e) {
+  clickHome.addEventListener('click', function(e) {
         e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/new_job.html";
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
+        window.location.replace("dashboard.php");
+        return false;
     });
     
-    clickHome.addEventListener('click', function goToHomePage(e) {
+    clickAddUser.addEventListener('click', function(e) {
         e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/dashboard.html";
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
+        window.location.replace("new_user.php");
+        return false;
     });
     
-    clickAddUser.addEventListener('click', function goToNewUser(e) {
+    clickNewJob.addEventListener('click', function(e) {
         e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/new_user.html"; 
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
-    });
-    
-    clickNewJob.addEventListener('click', function goToNewJob(e) {
-        e.preventDefault();
-        var url = "https://info2180project3-jazzydreamer.c9users.io/new_job.html";
-        
-        httpReq.onreadystatechange = loadPage;
-        httpReq.open('GET', url);
-        httpReq.send();
+        window.location.replace("new_job.php");
+        return false;
     });
     
     clickLogout.addEventListener('click', function goToLoginPage(e) {
@@ -57,12 +39,21 @@ window.onload = function() {
         }
     });
     
+        e.preventDefault();
+        var input = "Software Engineer";
+        var url = "job_details.php?Jobs=" + input;
+        httpReq.onreadystatechange = loadPage;
+        httpReq.open('GET', url);
+        httpReq.send();
+    
+    
     function loadPage() {
         if (httpReq.readyState === XMLHttpRequest.DONE) 
         {
             if (httpReq.status === 200)
             {
                 var response = httpReq.responseText;
+                document.getElementById('mainBar').innerHTML = response
             }
             else
             {

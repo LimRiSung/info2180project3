@@ -1,5 +1,9 @@
-<?php require "header.php" ?>
-<!DOCTYPE html>
+<?php require "header.php"?>
+<?php
+session_start();
+?>
+
+<!DOCTYPE hmtl>
 <html>
     <head>
         <meta charset="utf-8">
@@ -8,8 +12,8 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="dashboard.js" type="text/javascript"></script>
     </head>
-    <body>
-        <div id = "headerBar">
+    <body> 
+     <div id = "headerBar">
                 <h3><marquee>HireMe</marquee></h3>
         </div>
         <div id ="generalcontainer">
@@ -17,9 +21,11 @@
                 <p><img src="https://openclipart.org/download/68863/sweet-home.svg"></img><a href = "#" id = "home">Home</a><br>
                 <img src="https://www.freeiconspng.com/uploads/user-add-icon---shine-set-add-new-user-add-user-30.png"></img><a href = "#" id = "addUser">Add User</a><br>
                 <img src="https://www.clipartmax.com/png/full/33-330391_briefcase-work-job-work-icon-ico.png"></img><a href = "#" id = "newJob">New Job</a><br>
-                <!--<img src="https://png2.kisspng.com/sh/57a976f26d3b43a3a9cb650ca51eb22b/L0KzQYm3V8E1N6lngJH0aYP2gLBuTgBwf5Z3ReVEbXLyfH7qjB1xfaVqip9yY3Bxg37zjBdwfaUygdV4bj24coXog8A0OGM6fKg9Nz67SIa6VMg6OmI6S6MBMkW4QoG4VcUveJ9s/kisspng-power-symbol-computer-icons-logout-icon-5b4ac03025d647.885348921531625520155.png"></img><a href id = "logOut">Logout</a><br></p>-->
-                
-                <button id ="logoutBtn">Logout</button>
+                </p>
+                <form method="POST" action='logout.php'>
+                    <input type="submit"value="LOGOUT">
+                </form>
+               <!-- <button id ="logoutBtn">Logout</button>-->
                 
             </div>
             <div id = "mainBar">
@@ -34,42 +40,44 @@
                         <th>Category</th>
                         <th>Date</th>
                     </tr>
-                    <tr id = "bottmBorder">
+                    <tr>
                         <td>Jamaica Gleaner</td>
-                        <td><a href="">Product Marketing Manager</a></td>
+                        <td><a href="job_details.php">Product Marketing Manager</a></td>
                         <td>Sales & Marketing</td>
-                        <td>Nov 3, 2018</td>
+                        <td>Nov 3, 2018 <label id="new" style="background-color:yellow;">NEW</label></td>
                     </tr>
+                    
                     <tr>
                         <td>UWI - MITS</td>
-                        <td><a href="">Software Engineering</a></td>
+                        <td><a href="">Software Engineer</a></a></td>
                         <td>Programming</td>
-                        <td>Nov 2, 2018</td>
+                        <td>Nov 2, 2018 <label id="new" style="background-color:yellow;">NEW</label></td>
                     </tr>
                     <tr>
                         <td>NCB</td>
-                        <td><a href="">Business Analyst-Scrum Master</a></td>
+                        <td><a href="">Business Analyst - Scrum Master</a></td>
                         <td>Business & Management</td>
                         <td>Nov 1, 2018</td>
                     </tr>
                     <tr>
-                        <td>Jamaica Yellow Pages</td>
+                        <td>Jamaica - Yellow Pages</td>
                         <td><a href="">UX/UI Designer</a></td>
                         <td>Design</td>
                         <td>Oct 20, 2018</td>
                     </tr>
-                    <tr>
-                        <td>UWI - Bursary</td>
+                     <tr>
+                        <td>UWI - Busary</td>
                         <td><a href="">Director Customer Support</a></td>
                         <td>Customer Support</td>
                         <td>Oct 20, 2018</td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>Sagicor Bank</td>
                         <td><a href="">Senior Systems Engineer</a></td>
                         <td>DevOps & Sysadmin</td>
                         <td>Oct 20, 2018</td>
                     </tr>
+                    
                 </table>
                 <br>
                 <h3>Jobs Applied For</h3>
@@ -92,8 +100,46 @@
                         <td>Programming</td>
                         <td>May 5, 2018</td>
                     </tr>
+                    
                 </table>
             </div>
         </div>
     </body>
 </html>
+            <?php
+            $host = getenv('IP');
+            $username = getenv('C9_USER');
+            $password = '';
+            $dbname = 'hireme';
+            $jobs = $_GET['Jobs'];
+            $jobsApplied = $_GET['JobsAppliedFor'];
+            
+            if (isset($jobs)){
+                $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                $stmt = $conn->query("SELECT * FROM Jobs WHERE name LIKE '%$jobs%'");
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    echo '<tr>';
+                        foreach ($results as $row) {
+                            echo '<td>' . $row['company_name'] . '</td>';
+                            echo '<td>' . $row['job_title'] . '</td>';
+                            echo '<td>' . $row['category'] . '</td>';
+                            echo '<td>' . $row['date_posted'] . '</td>';
+                        }
+                    echo '</tr>';
+                    
+            } elseif(isset($jobsAppliedFor)){
+                $stmt = $conn->query("SELECT * FROM JobsAppliedFor WHERE name LIKE '%$jobsApplied%'");
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    echo '<tr>';
+                        foreach ($results as $row) {
+                            echo '<td>' . $row['company_name'] . '</td>';
+                            echo '<td>' . $row['job_title'] . '</td>';
+                            echo '<td>' . $row['category'] . '</td>';
+                            echo '<td>' . $row['date_posted'] . '</td>';
+                        }
+                    echo '</tr>';
+            }
+            ?>
+            
+            
+   
